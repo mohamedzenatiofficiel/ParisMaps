@@ -1,12 +1,12 @@
 import os
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, send_from_directory
 from google.cloud import bigquery
 from flask_cors import CORS
 
 # Définir le chemin vers votre fichier de clé de compte de service
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service-account-file.json"
 
-app = Flask(__name__, static_folder='../frontend/static', static_url_path='/static')
+app = Flask(__name__)
 CORS(app)  # Permettre CORS pour toutes les routes
 
 # Initialiser le client BigQuery

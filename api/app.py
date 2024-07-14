@@ -65,7 +65,7 @@ def get_travaux():
 
 @app.route('/')
 def serve_index():
-    return send_from_directory('../frontend', 'index.html')
+    return send_from_directory('ParisMaps/frontend', 'index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

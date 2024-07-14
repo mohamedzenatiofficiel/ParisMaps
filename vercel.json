@@ -6,7 +6,11 @@
       "use": "@vercel/python"
     },
     {
-      "src": "frontend/static/**/*",
+      "src": "frontend/static/css/styles.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "frontend/static/js/scripts.js",
       "use": "@vercel/static"
     },
     {
@@ -16,7 +20,7 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "/api/travaux",
       "dest": "/api/app.py"
     },
     {

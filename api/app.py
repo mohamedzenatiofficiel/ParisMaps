@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory
 from google.cloud import bigquery
 from flask_cors import CORS
 
@@ -33,7 +33,7 @@ QUERY = """
     LIMIT 1000
 """
 
-@app.route('/api/travaux', methods=['GET'])
+@app.route('/travaux', methods=['GET'])
 def get_travaux():
     try:
         query_job = client.query(QUERY)  # Exécuter la requête

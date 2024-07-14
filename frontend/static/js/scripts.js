@@ -13,7 +13,7 @@ console.log('Carte initialisée');
 // Fonction pour récupérer les données de l'API
 async function getTravaux() {
     try {
-        let response = await fetch('/api/travaux');
+        let response = await fetch('/travaux');
         if (!response.ok) {
             throw new Error('Erreur réseau: ' + response.statusText);
         }

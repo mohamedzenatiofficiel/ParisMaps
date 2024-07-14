@@ -13,6 +13,7 @@ console.log('Carte initialisée');
 // Fonction pour récupérer les données de l'API
 async function getTravaux() {
     try {
+        console.log('Récupération des travaux...');
         let response = await fetch('/api/travaux');
         if (!response.ok) {
             throw new Error('Erreur réseau: ' + response.statusText);
@@ -101,7 +102,9 @@ async function calculateRoute() {
     const endAddress = document.getElementById('end').value;
 
     try {
+        console.log('Géocodage de l\'adresse de départ...');
         startPoint = await geocode(startAddress);
+        console.log('Géocodage de l\'adresse d\'arrivée...');
         endPoint = await geocode(endAddress);
 
         // Ajouter des marqueurs pour les points A et B

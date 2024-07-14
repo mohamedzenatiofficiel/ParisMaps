@@ -8,16 +8,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-console.log('Carte initialisée');
-
 // Fonction pour récupérer les données de l'API
 async function getTravaux() {
     try {
-        console.log('Récupération des travaux...');
-        let response = await fetch('/api/travaux');
-        if (!response.ok) {
-            throw new Error('Erreur réseau: ' + response.statusText);
-        }
+        let response = await fetch('http://127.0.0.1:5000/travaux');
         let data = await response.json();
         console.log('Données récupérées de l\'API:', data);  // Log des données
         return data;
@@ -102,16 +96,12 @@ async function calculateRoute() {
     const endAddress = document.getElementById('end').value;
 
     try {
-        console.log('Géocodage de l\'adresse de départ...');
         startPoint = await geocode(startAddress);
-        console.log('Géocodage de l\'adresse d\'arrivée...');
         endPoint = await geocode(endAddress);
 
         // Ajouter des marqueurs pour les points A et B
         L.marker(startPoint, { icon: startIcon }).addTo(map).bindPopup('Point de départ').openPopup();
         L.marker(endPoint, { icon: endIcon }).addTo(map).bindPopup('Point d\'arrivée').openPopup();
-
-        console.log('Points de départ et d\'arrivée ajoutés');
 
         // Mettre à jour le routage
         updateRouting();
@@ -140,7 +130,6 @@ function updateRouting() {
         routingControl.on('routesfound', function(e) {
             var routes = e.routes;
             var waypoints = routes[0].coordinates.map(coord => L.latLng(coord.lat, coord.lng));
-            console.log('Itinéraire trouvé:', routes);
             // Récupérer et afficher les travaux proches de l'itinéraire
             getTravaux().then(travaux => addMarkers(travaux, waypoints));
         });

@@ -33,7 +33,7 @@ QUERY = """
     
 """
 
-@app.route('/travaux', methods=['GET'])
+@app.route('/api/travaux', methods=['GET'])
 def get_travaux():
     try:
         query_job = client.query(QUERY)  # Exécuter la requête

@@ -30,7 +30,6 @@ QUERY = """
         longitude,
         latitude
     FROM `newmap-427113.dataset.data`
-    LIMIT 1000
     
 """
 

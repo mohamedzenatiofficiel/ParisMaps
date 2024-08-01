@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // URL de l'API
-const API_URL = 'https://paris-maps.vercel.app/travaux';  // Assurez-vous que cette URL est correcte
+const API_URL = 'https://paris-maps.vercel.app/api/travaux';  // Assurez-vous que cette URL est correcte
 
 // Fonction pour récupérer les données de l'API
 async function getTravaux() {

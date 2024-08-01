@@ -1,13 +1,13 @@
 import os
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, send_from_directory
 from google.cloud import bigquery
 from flask_cors import CORS
 
 # Définir le chemin vers votre fichier de clé de compte de service
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service-account-file.json"
 
-app = Flask(__name__, static_folder='../frontend/static', static_url_path='/static')
-CORS(app)  # Permettre CORS pour toutes les routes
+app = Flask(__name__, static_folder='../frontend/static', template_folder='../frontend')
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Initialiser le client BigQuery
 client = bigquery.Client()
@@ -62,6 +62,10 @@ def get_travaux():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('../frontend/static', path)
 
 @app.route('/')
 def serve_index():

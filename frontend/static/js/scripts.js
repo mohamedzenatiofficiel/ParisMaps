@@ -1,3 +1,5 @@
+// scripts.js
+
 // Initialisation de la carte
 var map = L.map('map').setView([48.8566, 2.3522], 12);
 
@@ -6,16 +8,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-// URL de l'API
-const API_URL = 'https://paris-maps.vercel.app/api/travaux';  // Assurez-vous que cette URL est correcte
-
 // Fonction pour récupérer les données de l'API
 async function getTravaux() {
     try {
-        let response = await fetch(API_URL);
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
+        let response = await fetch('http://127.0.0.1:5000/travaux');
         let data = await response.json();
         console.log('Données récupérées de l\'API:', data);  // Log des données
         return data;
@@ -139,9 +135,3 @@ function updateRouting() {
         });
     }
 }
-
-// Charger les travaux initiaux
-getTravaux().then(travaux => {
-    console.log('Travaux initiaux:', travaux); // Log des travaux initiaux
-    addMarkers(travaux, []);
-});
